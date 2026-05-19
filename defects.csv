@@ -1,1 +1,13 @@
 ﻿ID,Module,Title,Severity,Priority,Steps to Reproduce,Expected Result,Actual Result,Status,Reported By
+BUG001,Contact,Contact Us form does not enforce required fields,Medium,Medium,"1. Navigate to /contact_us
+2. Leave Name Email Subject and Message fields blank
+3. Click Submit","Browser should block submission of empty form (HTML5 required attribute) so users do not submit blank enquiries","The Name and Subject fields are missing the 'required' attribute. The form attempts to submit with empty values and only the Email field's type-based validation is enforced — Name and Subject can be submitted as empty strings. Verified via JS: input[name='name'].required === false",Open,AI Agent
+BUG002,Cart,Hover-only Add-to-cart on product card requires JS hover to be visible on desktop,Low,Low,"1. Navigate to /products
+2. Locate the first product card without hovering
+3. Attempt to click 'Add to cart' on the card","'Add to cart' control should be reachable by keyboard / discoverable without hover for accessibility (WCAG 2.4.7 / 2.1.1)","The Add-to-cart button on listing cards is in an .overlay-content that is only made visible on hover. There is a duplicate '.productinfo .add-to-cart' that works, but the overlay variant is invisible to keyboard-only users and assistive tech",Open,AI Agent
+BUG003,Home,Console errors on initial page load,Low,Low,"1. Open browser DevTools Console
+2. Navigate to https://automationexercise.com
+3. Observe the console","Page should load without JavaScript errors","3-5 console errors are emitted on every page load (advertising / network related). Captured by Playwright on each goto. While the site still functions these errors pollute logs and may mask real issues",Open,AI Agent
+BUG004,Subscription,Duplicate success-message DOM containers (subscribe + contact),Low,Low,"1. Navigate to home
+2. Inspect the DOM for elements with class .alert-success or id #success-subscribe
+3. Also navigate to /contact_us","Each success message container should be unique per feature to keep selectors stable","Both the home page subscription and the contact form render success banners that share class names and live in containers using the same id (#success-subscribe). This caused Playwright strict-mode locator collisions during automation and indicates duplicate IDs in the DOM (invalid HTML)",Open,AI Agent

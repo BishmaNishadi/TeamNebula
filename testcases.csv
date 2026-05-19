@@ -1,1 +1,81 @@
 ﻿ID,Module,Title,Description,Preconditions,Steps,Expected Result,Priority,Type
+TC001,Home,Home page loads successfully,Verify the home page renders with title and key sections,None,"1. Navigate to baseURL
+2. Wait for page to load","Page title is 'Automation Exercise' and header carousel and features-items section are visible",High,UI
+TC002,Home,Top navigation links visible,Verify all top nav items present,Home page loaded,"1. Inspect top navigation","Links visible: Home Products Cart Signup / Login Test Cases API Testing Video Tutorials Contact us",High,UI
+TC003,Home,Subscription email submission,Verify newsletter subscription accepts a valid email,Home page loaded,"1. Scroll to footer
+2. Enter a valid email in Subscription
+3. Click the arrow submit button","Success message 'You have been successfully subscribed!' appears",Medium,Functional
+TC004,Home,Subscription with invalid email,Verify rejection of invalid email format,Home page loaded,"1. Scroll to footer
+2. Enter 'notanemail' in Subscription
+3. Click submit","Form does not submit (browser email validation) and no success message shown",Medium,Negative
+TC005,Home,Scroll to top arrow returns to top,Verify floating scroll-up control,Home page loaded,"1. Scroll to the bottom of the page
+2. Click the scroll-up arrow","Page scrolls back to the top",Low,UI
+TC006,Signup,Register account with valid data,Verify a new account can be created end-to-end,On Signup/Login page,"1. Enter name and unique email under 'New User Signup!'
+2. Click Signup
+3. Fill account details on the next form (title gender password DOB address country mobile etc.)
+4. Click Create Account
+5. On 'Account Created!' click Continue","User is signed up; 'Logged in as <name>' appears in header",High,Functional
+TC007,Signup,Signup with existing email,Verify duplicate-email registration is blocked,An email already used to register,"1. Enter any name and the existing email under 'New User Signup!'
+2. Click Signup","Error 'Email Address already exist!' is displayed",High,Negative
+TC008,Signup,Signup with empty fields,Verify required fields are enforced,On Signup/Login page,"1. Leave Name and Email empty
+2. Click Signup","Browser validation prevents submission; form stays on page",Medium,Negative
+TC009,Signup,Signup with invalid email format,Verify email field validates format,On Signup/Login page,"1. Enter name 'Tester' and email 'invalidemail'
+2. Click Signup","Native browser validation blocks submission; user remains on signup section",Medium,Negative
+TC010,Login,Login with valid credentials,Verify a registered user can log in,Account already exists,"1. Open Signup/Login page
+2. Under 'Login to your account' enter registered email and password
+3. Click Login","User is redirected to home and 'Logged in as <name>' is visible in header",High,Functional
+TC011,Login,Login with invalid password,Verify wrong password is rejected,Account exists,"1. Enter valid email and wrong password
+2. Click Login","Error 'Your email or password is incorrect!' is displayed",High,Negative
+TC012,Login,Login with unregistered email,Verify unknown email is rejected,No account with this email,"1. Enter 'noone@example.com' and any password
+2. Click Login","Error 'Your email or password is incorrect!' is displayed",High,Negative
+TC013,Login,Login with empty fields,Verify both fields required,On Signup/Login page,"1. Leave email and password blank
+2. Click Login","Browser validation prevents submission; user remains on the page",Medium,Negative
+TC014,Login,Logout,Verify a logged-in user can log out,User is logged in,"1. Click 'Logout' in header","User is redirected to the Signup/Login page and 'Logged in as' is no longer shown",High,Functional
+TC015,Account,Delete account,Verify a user can delete their account,User is logged in,"1. Click 'Delete Account' in header","Page 'Account Deleted!' is shown and Continue returns to home unauthenticated",High,Functional
+TC016,Products,All Products page loads,Verify product listing renders,Home page loaded,"1. Click 'Products' in nav","All Products heading and a grid of product cards are displayed",High,UI
+TC017,Products,View product details,Verify product detail page,On All Products page,"1. Click 'View Product' on the first card","Product detail page shows name category price availability condition brand and quantity input",High,Functional
+TC018,Products,Search product returns results,Verify product search works for an existing term,On All Products page,"1. Enter 'top' in #search_product
+2. Click #submit_search","Searched Products heading appears and at least one matching product is shown",High,Functional
+TC019,Products,Search with no matches,Verify empty-result handling,On All Products page,"1. Enter 'zzzzznosuchitem' in search
+2. Submit","Searched Products section is empty or shows an appropriate no-result indication",Medium,Negative
+TC020,Products,Search with empty query,Verify empty search behavior,On All Products page,"1. Clear search input
+2. Click search button","Either all products remain or an empty 'Searched Products' section is shown — no error",Low,Negative
+TC021,Products,Search special characters sanitized,Verify special characters do not break the search,On All Products page,"1. Enter '<script>alert(1)</script>' in search
+2. Submit","Input is treated as text no JS executes and the page does not crash",High,Negative
+TC022,Cart,Add product to cart from listing,Verify Add to Cart on a product card,On All Products page,"1. Hover the first card
+2. Click 'Add to cart'
+3. Click 'Continue Shopping' in the modal","Cart counter / modal confirms the item was added",High,Functional
+TC023,Cart,View cart shows added product,Verify cart page lists items,An item has been added to cart,"1. Click 'Cart' in nav","Cart page lists the added product with image name price quantity and total",High,Functional
+TC024,Cart,Update quantity from product detail then view in cart,Verify quantity is preserved,On a product detail page,"1. Set quantity to 4
+2. Click 'Add to cart'
+3. Click 'View Cart'","Cart page shows the product with quantity 4 and matching total",High,Functional
+TC025,Cart,Remove product from cart,Verify items can be removed,At least one item in cart,"1. On Cart page click the × delete button next to the item","Item is removed and cart shows 'Cart is empty!' if it was the last item",High,Functional
+TC026,Cart,Empty cart message,Verify empty-cart state,Cart contains no items,"1. Navigate to /view_cart","Page shows 'Cart is empty!' message",Medium,UI
+TC027,Cart,Add same product twice merges quantity,Verify duplicate adds increment qty,On a product detail page,"1. Set quantity to 1 and Add to cart
+2. Continue Shopping
+3. Add the same product again
+4. View Cart","Cart shows the product once with quantity 2",Medium,Functional
+TC028,Checkout,Proceed to checkout requires login,Verify checkout flow gates unauthenticated users,Cart has at least one item; not logged in,"1. On Cart page click Proceed To Checkout","Modal prompts to Register / Login before continuing to checkout",High,Functional
+TC029,Checkout,Checkout shows address and review,Verify address and order review appear,User logged in with items in cart,"1. Open Cart
+2. Click Proceed To Checkout","Address Details and Review Your Order sections are visible with delivery/billing address and product summary",High,Functional
+TC030,Checkout,Place order with valid card,Verify the order is placed and confirmation shown,On Checkout page,"1. Add a comment in the message box
+2. Click Place Order
+3. Enter Name on Card valid card number CVC expiry MM and YYYY
+4. Click 'Pay and Confirm Order'","'Order Placed!' confirmation page is displayed",High,Functional
+TC031,Checkout,Place order with empty card details,Verify card form validates required fields,On Payment page,"1. Click 'Pay and Confirm Order' without filling card fields","Form does not submit; required field validation prevents payment",High,Negative
+TC032,Contact,Submit contact form successfully,Verify Contact Us submission with file upload,On Contact Us page,"1. Fill Name Email Subject Message
+2. Attach any small file via 'Choose File'
+3. Click Submit and accept browser confirm","Success banner 'Success! Your details have been submitted successfully.' appears",Medium,Functional
+TC033,Contact,Contact form requires fields,Verify validation of required fields,On Contact Us page,"1. Leave fields blank
+2. Click Submit","Browser validation blocks submission",Medium,Negative
+TC034,TestCases,Test Cases page renders list,Verify Test Cases informational page loads,Home page loaded,"1. Click 'Test Cases' in nav","Test Cases heading and an enumerated list of test cases are visible",Low,UI
+TC035,APITesting,API List page renders,Verify API Testing reference page loads,Home page loaded,"1. Click 'API Testing' in nav","'APIs List for practice' page is shown with API endpoints",Low,UI
+TC036,UI,Responsive layout on mobile viewport,Verify the site adapts to mobile width,Browser at 375x812,"1. Resize viewport to 375x812
+2. Navigate to home","Layout reflows; no horizontal scrollbar; main content visible",Medium,UI
+TC037,UI,No broken images on home,Verify all images load on the home page,Home page loaded,"1. Inspect all img elements for naturalWidth > 0","No broken images (every image has naturalWidth > 0)",Medium,UI
+TC038,Security,XSS in product search is sanitized,Verify reflected XSS is not executed,Home page loaded,"1. Submit '<img src=x onerror=alert(1)>' in product search","No JS dialog fires and no injected <img onerror> element appears in the DOM",High,Negative
+TC039,Security,SQL injection attempt in login is rejected,Verify auth resists trivial SQLi payloads,On Signup/Login page,"1. Enter '' OR 1=1 -- in email and password
+2. Click Login","Login is rejected with the normal 'email or password is incorrect' message and no SQL error is exposed",High,Negative
+TC040,Boundary,Signup with very long name,Verify input length is handled,On Signup/Login page,"1. Enter a 300-character name and a unique email
+2. Click Signup","Either the form rejects the input gracefully or accepts it without breaking the layout",Low,Boundary
+
