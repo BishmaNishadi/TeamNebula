@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Playwright outputs
+test-results/
+playwright-report/
+test-results.json
+.auth/
+.playwright-mcp/
+
+# Logs
+*.log
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*.log
+
+# Local env
+.env
+.env.local
