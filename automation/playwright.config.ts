@@ -14,7 +14,7 @@ export default defineConfig({
     ['json', { outputFile: 'test-results.json' }],
   ],
   use: {
-    baseURL: process.env.BASE_URL || 'https://automationexercise.com',
+    baseURL: process.env.BASE_URL || 'https://example.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
