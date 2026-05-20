@@ -24,18 +24,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      testIgnore: /tests[\\/]api[\\/].*/,
       use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'api',
-      testMatch: /tests[\\/]api[\\/].*\.spec\.ts$/,
-      use: {
-        baseURL: process.env.API_BASE_URL || process.env.BASE_URL || 'https://automationexercise.com',
-        extraHTTPHeaders: {
-          Accept: 'application/json',
-        },
-      },
     },
   ],
 });
